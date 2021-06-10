@@ -1,0 +1,45 @@
+service: customers-api
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-east-2
+
+plugins:
+  - serverless-plugin-typescript 
+  - serverless-offline
+
+functions:
+  create:
+    handler: src/index.httpPut
+    events:
+      - http:
+          path: src
+          method: put
+          cors: true
+
+  get:
+    handler: src/index.httpGet
+    events:
+      - http:
+          path: src
+          method: get
+          cors: true
+        
+  list:
+    handler: src/index.httpList
+    events:
+      - http:
+          path: src
+          method: get
+          cors: true
+        
+  delete:
+    handler: src/index.httpDelete
+    events:
+      - http:
+          path: src
+          method: delete
+          cors: true
