@@ -6,6 +6,12 @@ provider:
   name: aws
   runtime: nodejs14.x
   region: eu-east-2
+  stage: aws-dev
+  # stage: ${self:custom.profiles.${sls:stage}}
+custom:
+  profiles:
+    dev: aws-dev
+    prod: aws-prod
 
 plugins:
   - serverless-plugin-typescript 
@@ -16,7 +22,7 @@ functions:
     handler: src/index.httpPut
     events:
       - http:
-          path: src
+          path: api/put
           method: put
           cors: true
 
@@ -24,7 +30,7 @@ functions:
     handler: src/index.httpGet
     events:
       - http:
-          path: src
+          path: api/get/{id}
           method: get
           cors: true
         
@@ -32,7 +38,7 @@ functions:
     handler: src/index.httpList
     events:
       - http:
-          path: src
+          path: api/list
           method: get
           cors: true
         
@@ -40,6 +46,6 @@ functions:
     handler: src/index.httpDelete
     events:
       - http:
-          path: src
+          path: api/delete/{id}
           method: delete
           cors: true

@@ -1,2 +1,2 @@
-import AWS from 'aws-sdk/clients/dynamodb';
-const dynamodb = new AWS();
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb";
+const client = new DynamoDBClient({ region: 'us-east-2' });
